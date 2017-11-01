@@ -1,5 +1,5 @@
 function [D, A, B] = Diagonal(square)
-%This function takes in an array and returns various outputs related to the
+%DIAGONAL takes in an array and returns various outputs related to the
 %diagonal of the matrix
     n = (length(square(1,:)));
     D = zeros(n);
