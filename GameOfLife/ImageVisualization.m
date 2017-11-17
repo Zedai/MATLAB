@@ -1,4 +1,4 @@
-function ImageVisualization(grid)
+function ImageVisualization(grid, delay)
     disp(grid);
     data = zeros(length(grid(1,:))*30, length(grid(1,:))*30, 3);
                         
@@ -10,7 +10,7 @@ function ImageVisualization(grid)
             end
     end
     imshow(data);
-    pause(1);
+    pause(delay);
     
     %starts the game
     while hasLive(grid)
@@ -36,7 +36,7 @@ function ImageVisualization(grid)
         grid = newGrid;
         imshow(data);
         disp(grid);
-        pause(1);
+        pause(delay);
     end
 end
 
