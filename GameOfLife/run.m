@@ -101,7 +101,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-load(get(handles.edit1,'String'))
+load(get(handles.edit1,'string'))
 figure,
 ImageVisualization(A, (1-get(handles.slider1, 'Value')) * 2);
 
