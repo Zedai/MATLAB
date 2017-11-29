@@ -72,17 +72,6 @@ function varargout = soundImage_OutputFcn(hObject, eventdata, handles)
 % Get default command line output from handles structure
 varargout{1} = handles.output;
 
-
-
-function fileLocation_Callback(hObject, eventdata, handles)
-% hObject    handle to fileLocation (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of fileLocation as text
-%        str2double(get(hObject,'String')) returns contents of fileLocation as a double
-
-
 % --- Executes during object creation, after setting all properties.
 function fileLocation_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to fileLocation (see GCBO)
@@ -95,12 +84,9 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
+function fileLocation_Callback(hObject, eventdata, handles)
 
-% --- Executes on button press in fileRead.
 function fileRead_Callback(hObject, eventdata, handles)
-% hObject    handle to fileRead (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 if handles.fileCheck.Value == 0 && handles.soundCheck.Value == 0
     errordlg('No CheckBox Selected', 'Input Error');
 end
@@ -112,15 +98,7 @@ else
     guidata(hObject, handles);
 end
 
-
-
-% --- Executes on button press in soundCheck.
 function soundCheck_Callback(hObject, eventdata, handles)
-% hObject    handle to soundCheck (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: get(hObject,'Value') returns toggle state of soundCheck
 if get(hObject, 'Value')
     handles.playSound.BackgroundColor = [0 1 0];
     handles.showImage.BackgroundColor = [1 0 0];
@@ -130,13 +108,7 @@ else
     handles.showImage.BackgroundColor = [0.94 0.94 0.94];
 end
 
-% --- Executes on button press in fileCheck.
 function fileCheck_Callback(hObject, eventdata, handles)
-% hObject    handle to fileCheck (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: get(hObject,'Value') returns toggle state of fileCheck
 if get(hObject, 'Value')
     handles.showImage.BackgroundColor = [0 1 0];
     handles.playSound.BackgroundColor = [1 0 0];
@@ -146,23 +118,14 @@ else
     handles.showImage.BackgroundColor = [0.94 0.94 0.94];
 end
 
-
-% --- Executes on button press in playSound.
 function playSound_Callback(hObject, eventdata, handles)
-% hObject    handle to playSound (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 if handles.soundCheck.Value && isfield(handles, 'song')
     sound(handles.song);
 else
     errordlg('Data does not exist or checkbox is not checked');
 end
 
-% --- Executes on button press in showImage.
 function showImage_Callback(hObject, eventdata, handles)
-% hObject    handle to showImage (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 if handles.fileCheck.Value && isfield(handles, 'picture')
     figure,
     imshow(handles.picture);
