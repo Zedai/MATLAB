@@ -22,7 +22,7 @@ function varargout = run(varargin)
 
 % Edit the above text to modify the response to help run
 
-% Last Modified by GUIDE v2.5 16-Nov-2017 19:13:41
+% Last Modified by GUIDE v2.5 29-Nov-2017 16:35:37
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -74,18 +74,18 @@ varargout{1} = handles.output;
 
 
 
-function edit1_Callback(hObject, eventdata, handles)
-% hObject    handle to edit1 (see GCBO)
+function location_Callback(hObject, eventdata, handles)
+% hObject    handle to location (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit1 as text
-%        str2double(get(hObject,'String')) returns contents of edit1 as a double
+% Hints: get(hObject,'String') returns contents of location as text
+%        str2double(get(hObject,'String')) returns contents of location as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit1 (see GCBO)
+function location_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to location (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -96,23 +96,19 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in pushbutton1.
-function pushbutton1_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton1 (see GCBO)
+% --- Executes on button press in readFile.
+function readFile_Callback(hObject, eventdata, handles)
+% hObject    handle to readFile (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-try
-    load(get(handles.edit1,'string'));
-catch
-    load(get(handles.edit1,'String'));
-end
+load(handles.location.String);
 figure,
-ImageVisualization(A, (1-get(handles.slider1, 'Value')) * 2);
+ImageVisualization(A, (1-get(handles.speed, 'Value')) * 2);
 
 
 % --- Executes on slider movement.
-function slider1_Callback(hObject, eventdata, handles)
-% hObject    handle to slider1 (see GCBO)
+function speed_Callback(hObject, eventdata, handles)
+% hObject    handle to speed (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
@@ -121,8 +117,8 @@ function slider1_Callback(hObject, eventdata, handles)
 
 
 % --- Executes during object creation, after setting all properties.
-function slider1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider1 (see GCBO)
+function speed_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to speed (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 

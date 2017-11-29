@@ -105,10 +105,10 @@ if handles.fileCheck.Value == 0 && handles.soundCheck.Value == 0
     errordlg('No CheckBox Selected', 'Input Error');
 end
 if handles.soundCheck.Value
-    handles.song = audioread(get(handles.fileLocation, 'string'));
+    handles.song = audioread(handles.fileLocation.String);
     guidata(hObject, handles);
 else
-    handles.picture = imread(get(handles.fileLocation, 'string'));
+    handles.picture = imread(handles.fileLocation.String);
     guidata(hObject, handles);
 end
 
