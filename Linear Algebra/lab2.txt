@@ -1,0 +1,333 @@
+format compact
+%Venkata Saikiran Nakka
+%4116
+%Section C2
+% Math 250 MATLAB Lab Assignment #2rand('seed', 4116)
+%Question 1 (a)
+A = rmat(3, 5), rank(A(:,1:3))
+A =
+     1     2     3     4     5
+     3     9     3     8     6
+     2     2     8     1     6
+ans =
+     3
+b = rvect(3), R = rref([A b])
+b =
+     5
+     8
+     2
+R =
+    1.0000         0         0  -27.1667  -24.0000  -34.6667
+         0    1.0000         0    8.3333    7.0000   10.3333
+         0         0    1.0000    4.8333    5.0000    6.3333
+S = R(:,1:5)
+S =
+    1.0000         0         0  -27.1667  -24.0000
+         0    1.0000         0    8.3333    7.0000
+         0         0    1.0000    4.8333    5.0000
+rref(A)
+ans =
+    1.0000         0         0  -27.1667  -24.0000
+         0    1.0000         0    8.3333    7.0000
+         0         0    1.0000    4.8333    5.0000
+%The first three columns are pivot columns
+%The rank of of R is 3 and the rank of A is 3
+%The nullity of A is 2 and the last two columns are the free variables
+%The equation has a solution because there are no zeros rows
+%Question 1 (b)
+c = R(:,6)
+c =
+  -34.6667
+   10.3333
+    6.3333
+x=[c;0;0]
+x =
+  -34.6667
+   10.3333
+    6.3333
+         0
+         0
+A*x - b
+ans =
+   1.0e-14 *
+    0.2665
+    0.3553
+    0.7105
+S*x - c
+ans =
+     0
+     0
+     0
+%Since A*x is b and S*x is c, subtracitng the latter from the first results in the zero vector
+%Question 1 (c)
+u = [-S(:,4); 1; 0], v = [-S(:,5);0;1]
+u =
+   27.1667
+   -8.3333
+   -4.8333
+    1.0000
+         0
+v =
+    24
+    -7
+    -5
+     0
+     1S*u
+ans =
+     0
+     0
+     0
+A*u
+ans =
+   1.0e-14 *
+    0.0888
+   -0.3553
+    0.7105
+S*v
+ans =
+     0
+     0
+     0
+ans =
+     0
+     0
+     0
+s = rand(1), t = rand(1), y = s*u + t*v
+s =
+    0.1436
+t =
+    0.9404
+y =
+   26.4713
+   -7.7796
+   -5.3962
+    0.1436
+    0.9404
+%Either A is a zero matrix or y is a zero vector
+A*y
+ans =
+   1.0e-14 *
+    0.0555
+   -0.4663
+   -0.1110
+z=x+y
+z =
+   -8.1954
+    2.5537
+    0.9372
+    0.1436
+    0.9404
+%A*z is equal to A*x + A*y which simplifies down to b + 1
+A*z - b
+ans =
+   1.0e-13 *
+    0.0355
+    0.1066
+    0.0622
+%Question 2 (a)
+u1 = rvect(3), u2 = rvect(3), u3 = rvect(3), u4 = rvect(3)
+u1 =
+     1
+     4
+     9
+u2 =
+     7
+     6
+     4
+u3 =
+     7
+     4
+     9
+u4 =
+     5
+     4
+     0
+A = [u1 u2 u3], rref(A)
+A =
+     1     7     7
+     4     6     4
+     9     4     9
+ans =
+     1     0     0
+     0     1     0
+     0     0     1
+%The equation has no free variables
+%The set is linearly independent because the only way to make Ax = 0 is with a trivial solution
+%No vectors are linear combinations of each other
+%Question 2 (b)
+B = [u1 u2 u3 u4], rref(B)
+B =
+     1     7     7     5
+     4     6     4     4
+     9     4     9     0
+ans =
+    1.0000         0         0   -0.2193
+         0    1.0000         0    0.9474
+         0         0    1.0000   -0.2018
+%The vector has 3 free variables
+%This set is linearly dependent because the last is a linear combination of the other
+%Question 2 (c)
+v = rand(1)*u1 + rand(1)*u2
+v =
+    2.9061
+    4.3445
+    6.6316
+U = [u1 u2 v]
+U =
+    1.0000    7.0000    2.9061
+    4.0000    6.0000    4.3445
+    9.0000    4.0000    6.6316
+%v is a linear combination of u1 and u2, therefore the set is linearly dependent
+rref(U)
+ans =
+    1.0000         0    0.5898
+         0    1.0000    0.3309
+         0         0         0
+diary off
+%Question 3 (a)
+A = rmat(2,3), B = rmat(3, 4), C = rmat(4,3), v = rvect(4)
+A =
+     4     0     7
+     0     3     4
+B =
+     6     9     6     7
+     6     8     8     2
+     1     8     2     9
+C =
+     3     6     8
+     5     7     8
+     6     2     7
+     6     5     8
+v =
+     0
+     4
+     1
+     0
+u = B*v, A*u, D = A*B, D*v
+u =
+    42
+    40
+    34
+ans =
+   406
+   256
+D =
+    31    92    38    91
+    22    56    32    42
+ans =
+   406
+   256
+A*(B*C)
+ans =
+        1327        1361        1978
+         790         798        1184
+(A*B)*C
+ans =
+        1327        1361        1978
+         790         798        1184
+%Question 3 (b)
+A = [0 1; 0 0], B = [0 0; 1 0], C = [0 1; 1 0]
+A =
+     0     1
+     0     0
+B =
+     0     0
+     1     0
+C =
+     0     1
+     1     0
+A*B
+ans =
+     1     0
+     0     0
+B*A
+ans =
+     0     0
+     0     1
+%AB != BA
+(A+B)^2
+ans =
+     1     0
+     0     1
+A^2+2*A*B+B^2
+ans =
+     2     0
+     0     0
+%(A+B)^2 != A^2 + 2AB + B^2
+A^2
+ans =
+     0     0
+     0     0
+%This just multiplies A by itself on a whole, not term by term
+A*B
+ans =
+     1     0
+     0     0
+A*C
+ans =
+     1     0
+     0     0
+%This may seem like B and C are the same matrix, however B != C
+%Question 4
+A = [0 0 0 1 0 1;1 0 1 1 0 0;0 1 0 1 0 0;1 0 1 0 0 0;1 1 1 0 0 1;0 0 1 1 0 0]
+A =
+     0     0     0     1     0     1
+     1     0     1     1     0     0
+     0     1     0     1     0     0
+     1     0     1     0     0     0
+     1     1     1     0     0     1
+     0     0     1     1     0     0
+B=A^2
+B =
+     1     0     2     1     0     0
+     1     1     1     2     0     1
+     2     0     2     1     0     0
+     0     1     0     2     0     1
+     1     1     2     4     0     1
+     1     1     1     1     0     0
+%There are people who can't get a message in one stage or at all like column 5
+A
+A =
+     0     0     0     1     0     1
+     1     0     1     1     0     0
+     0     1     0     1     0     0
+     1     0     1     0     0     0
+     1     1     1     0     0     1
+     0     0     1     1     0     0
+%1 way
+A^2
+ans =
+     1     0     2     1     0     0
+     1     1     1     2     0     1
+     2     0     2     1     0     0
+     0     1     0     2     0     1
+     1     1     2     4     0     1
+     1     1     1     1     0     0
+%1 way
+A^3
+ans =
+     1     2     1     3     0     1
+     3     1     4     4     0     1
+     1     2     1     4     0     2
+     3     0     4     2     0     0
+     5     2     6     5     0     1
+     2     1     2     3     0     1
+%3 ways
+A^4
+ans =
+     5     1     6     5     0     1
+     5     4     6     9     0     3
+     6     1     8     6     0     1
+     2     4     2     7     0     3
+     7     6     8    14     0     5
+     4     2     5     6     0     2
+%5 ways
+B = A + A^2 + A^3 + A^4
+B =
+     7     3     9    10     0     3
+    10     6    12    16     0     5
+     9     4    11    12     0     3
+     6     5     7    11     0     4
+    14    10    17    23     0     8
+     7     4     9    11     0     3
+%B(3,4) = 12 ways
