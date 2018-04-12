@@ -1,0 +1,334 @@
+format compact
+%Venkata Saikiran Nakka
+%4116
+%Section C2
+%Math 250 MATLAB Lab Assignment #4rand('seed', 4116)
+%Question 1 (a)
+A = rmat(3,2)
+A =
+     1     2
+     3     9
+     2     2
+u = A(:,1), v = A(:,2)
+u =
+     1
+     3
+     2
+v =
+     2
+     9
+     2
+[s,t] = meshgrid((-1:0.1:1), (-1:0.1:1));
+X = s*u(1)+t*v(1); Y = s*u(2)+t*v(2); Z = s*u(3)+t*v(3);
+surf(X,Y,Z); axis square; colormap hot, hold on
+%Question 1 (b)
+b = rvect(3)
+b =
+     3
+     3
+     8
+r = -1:0.05:1;
+plot3(r*b(1),r*b(2),r*b(3), "--")%Question 1 (c)
+%No because b does not lie on the plane of Col(A)
+%Question 1 (d)
+z = rand(2,1), c = A*z
+z =
+    0.4144
+    0.8909
+c =
+    2.1963
+    9.2617
+    2.6107
+figure, surf(X,Y,Z); axis square; colormap hot, hold onplot3(r*c(1),r*c(2),r*c(3), "+")
+%Question 2 (a)
+B = rmat(3,3), rank(B)
+B =
+     1     6     2
+     5     5     6
+     6     8     9
+ans =
+     3
+A = [B(:,1), B(:,2), 2*B(:,1) + 3*B(:,2), 4*B(:,1) - 5*B(:,2), B(:,3)],
+A =
+     1     6    20   -26     2
+     5     5    25    -5     6
+     6     8    36   -16     9
+R = rref(A)
+R =
+     1     0     2     4     0
+     0     1     3    -5     0
+     0     0     0     0     1
+%Columns 1,2, and 5 are pivot columns of A because the pivot columns of the rref of a matrix coresponds with the original matrix.
+%Column 3 and 4 are the vectors found by going from top to bottom of the respective column.
+%Question 2 (b)
+%There are two free variables (x3, x4) which is the same as the dimension.
+%Question 2 (c)
+N = nulbasis(A)
+N =
+    -2    -4
+    -3     5
+     1     0
+     0     1
+     0     0
+v1 = N(:,1), v2 = N(:,2)
+v1 =
+    -2
+    -3
+     1
+     0
+     0
+v2 =
+    -4
+     5
+     0
+     1
+     0
+%The x3 component of v1 is 1 and the x4 & x5 components of v1 are 0
+%The x4 component of v2 is 1 and the x3 & x5 components of v2 are 0
+%v1 and v2 are the vectors in the nullspace
+%Question 2 (d)
+s = rand(1), t = rand(1), x = s*v1 + t*v2
+s =
+    0.1436
+t =
+    0.9404
+x =
+   -4.0488
+    4.2711
+    0.1436
+    0.9404
+         0
+%Because the vectors v1 and v2 form a basis for the solution set so any linear combination of the two vectors is also a solution.
+A*x
+ans =
+   1.0e-14 *
+    0.4219
+    0.2998
+    0.3553
+R*x
+ans =
+   1.0e-15 *
+    0.4441
+    0.3331
+         0
+%Question 3 (a)
+A = rmat(5, 3), R = rref(A)
+A =
+     9     4     5
+     7     9     3
+     6     5     4
+     4     4     0
+     7     0     0
+R =
+     1     0     0
+     0     1     0
+     0     0     1
+     0     0     0
+     0     0     0
+b = rmat(5,1), xp = partic(A, b)
+b =
+     3
+     7
+     4
+     6
+     6
+xp =
+     []
+b = rand(1)*A(:,1) + rand(1)*A(:,2) + rand(1)*A(:,3)
+b =
+    9.2763
+   12.2104
+    9.0160
+    4.4293
+    0.9292
+xp = partic(A, b)
+xp =
+    0.1327
+    0.9746
+    0.8367
+A*xp
+ans =
+    9.2763
+   12.2104
+    9.0160
+    4.4293
+    0.9292
+b
+b =
+    9.2763
+   12.2104
+    9.0160
+    4.4293
+    0.9292
+%Theorem 1.5 states that the vector b is a linear combination of the columns of A.
+%Question 3 (b)
+A = rmat(3, 5), R = rref(A)
+A =
+     8     2     9     6     7
+     6     7     3     6     2
+     8     2     5     6     5
+R =
+    1.0000         0         0    0.6818    0.3750
+         0    1.0000         0    0.2727   -0.2500
+         0         0    1.0000         0    0.5000
+%Since the rank of the matrix is 3, the span of the columns of A is R3.
+b = rmat(3,1), xp = partic(A, b)
+b =
+     8
+     8
+     7
+xp =
+    0.5852
+    0.5341
+    0.2500
+         0
+         0
+%Entries 4 and 5 are zero because they are free variables since b only has 3 entries.
+A*xp
+ans =
+     8
+     8
+     7
+b
+b =
+     8
+     8
+     7
+%Question 4 (a)
+N = nulbasis(A)
+N =
+   -0.6818   -0.3750
+   -0.2727    0.2500
+         0   -0.5000
+    1.0000         0
+         0    1.0000
+v1 = N(:,1), v2 = N(:,2)
+v1 =
+   -0.6818
+   -0.2727
+         0
+    1.0000
+         0
+v2 =
+   -0.3750
+    0.2500
+   -0.5000
+         0
+    1.0000
+x = xp + rand(1)*v1 + rand(1)*v2
+x =
+    0.0023
+    0.3356
+    0.2066
+    0.8073
+    0.0868
+A*x
+ans =
+     8
+     8
+     7
+b
+b =
+     8
+     8
+     7
+%Question 4 (b)x = xp - 9*v1 + 8*v2
+x =
+    3.7216
+    4.9886
+   -3.7500
+   -9.0000
+    8.0000
+A*x
+ans =
+    8.0000
+    8.0000
+    7.0000
+%Question 5 (a)A = [0.30 0; 0.14 0;0.56 1]
+A =
+    0.3000         0
+    0.1400         0
+    0.5600    1.0000
+B = [0.5 0 0;0.5 1 0.6;0 0 0.4]
+B =
+    0.5000         0         0
+    0.5000    1.0000    0.6000
+         0         0    0.4000
+C = [1 0.3 0;0 0.2 0;0 0.35 0.7;0 0.15 0.3]
+C =
+    1.0000    0.3000         0
+         0    0.2000         0
+         0    0.3500    0.7000
+         0    0.1500    0.3000
+M=C*B*A
+M =
+    0.3378    0.1800
+    0.1252    0.1200
+    0.3759    0.4900
+    0.1611    0.2100
+x = 1000*rvect(2), y = A*x, z = B*y, w = C*z
+x =
+        4000
+        1000
+y =
+        1200
+         560
+        3240
+z =
+         600
+        3104
+        1296
+w =
+   1.0e+03 *
+    1.5312
+    0.6208
+    1.9936
+    0.8544
+[1 1]*x, [1 1 1]*y, [1 1 1]*z, [1 1 1 1]*w
+ans =
+        5000
+ans =
+        5000
+ans =
+        5000
+ans =
+        5000
+%Each of the numbers is the sums of x, y, z, and w respectively
+%5000 cars flow through each path of the network.
+y = [270 126 704]y = y'
+y =
+   270
+   126
+   704
+%A*x=y
+%A*x = y
+xp = partic(A, y)
+xp =
+   900
+   200
+%Since we are looking for a particul solution, the answer is uniquely determined.
+%Question 5 (c)
+w = [100 200 300 400]
+w =
+   100   200   300   400
+w=w'
+w =
+   100
+   200
+   300
+   400
+%W = Mx
+rref([M w])
+ans =
+     1     0     0
+     0     1     0
+     0     0     1
+     0     0     0
+xp = partic(M, w)
+xp =
+     []
+x = mldivide(M,w)
+x =
+ -175.0057
+  980.1373
+%w can be an output vector
