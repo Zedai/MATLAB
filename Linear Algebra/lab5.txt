@@ -7,13 +7,222 @@ rand('seed', 4116)
 %Question 1 (a)
 eigshow
 %There is one positive eigenvalues.
-%There are no negative eigenvalues.
-%The approximate eigenvalue is 1.6 from a graphical analysis.
+%There is one negative eigenvalues.
+%The approximate eigenvalues are 1.5, and -0.5 from a graphical analysis.
 %Question 1 (b)
 %There are no lines through zero that contain both x and Ax.
 %There are no real eigenvalues or eigenvectors however there are complex ones because eigenvectors of a matrix always exist.
 %Question 2 (a)
-A = [1 3; 4 2]/4
+solve(p)A = [1 3; 4 2]/4
+
 A =
+
     0.2500    0.7500
     1.0000    0.5000
+
+syms t; I = eye(2); p = det(A - t*I)
+ 
+p =
+ 
+t^2 - (3*t)/4 - 5/8
+ 
+%Question 2 (b)
+solve(p)
+ 
+ans =
+ 
+ -1/2
+  5/4
+ 
+%These values are close to the values from Question 1
+%Question 2 (c)
+A = [3 1 ; -2 4 ]/4
+
+A =
+
+    0.7500    0.2500
+   -0.5000    1.0000
+
+syms t; I = eye(2); p = det(A - t*I)
+ 
+p =
+ 
+t^2 - (7*t)/4 + 7/8
+ 
+solve(p)
+ 
+ans =
+ 
+ 7/8 - (7^(1/2)*1i)/8
+ (7^(1/2)*1i)/8 + 7/8
+ 
+%These eigenvalues are not real which explains why x and Ax were never parallel.
+%Question 3 (a)
+rand('seed', 4116)
+A = rmat(3,3), z = eig(A) - real(eig(A))
+
+A =
+
+     1     2     3
+     3     9     3
+     2     2     8
+
+
+z =
+
+     0
+     0
+     0
+
+syms t; I = eye(3); p = det(A - t*I)
+ 
+p =
+ 
+- t^3 + 18*t^2 - 71*t - 6
+ 
+figure; ezplot(p, [-10, 10]), grid
+%Question 3 (b)
+[P D] = eig(A)
+
+P =
+
+   -0.9509    0.2876    0.0937
+    0.2574    0.7969   -0.7493
+    0.1716    0.5313    0.6556
+
+
+D =
+
+   -0.0828         0         0
+         0   12.0828         0
+         0         0    6.0000
+
+%These values closely match the graphical estimates.
+p1 = P(:,1), p2 = P(:,2), p3 = P(:,3)
+
+p1 =
+
+   -0.9509
+    0.2574
+    0.1716
+
+
+p2 =
+
+    0.2876
+    0.7969
+    0.5313
+
+
+p3 =
+
+    0.0937
+   -0.7493
+    0.6556
+
+A*p1 - D(1,1)*p1, A*p2 - D(2,2)*p2, A*p3 - D(3,3)*p3
+
+ans =
+
+   1.0e-15 *
+
+   -0.4302
+    0.4337
+    0.0989
+
+
+ans =
+
+   1.0e-14 *
+
+         0
+    0.1776
+    0.1776
+
+
+ans =
+
+   1.0e-15 *
+
+    0.1110
+   -0.8882
+   -0.4441
+
+%This calculation tells us that the columns of P are the eigenvectors that correspond to the eigenvectors of A.
+%Question 3 (c)
+A
+
+A =
+
+     1     2     3
+     3     9     3
+     2     2     8
+
+P*D*inv(P)
+
+ans =
+
+    1.0000    2.0000    3.0000
+    3.0000    9.0000    3.0000
+    2.0000    2.0000    8.0000
+
+%A^5 = P * D^5 * P^-1
+%A^10 = P * D^10 * P^-1
+P*D^5*inv(P)
+
+ans =
+
+   1.0e+05 *
+
+    0.2292    0.4888    0.5370
+    0.6351    1.3995    1.4199
+    0.4234    0.8812    1.0243
+
+P*D^10*inv(P)
+
+ans =
+
+   1.0e+10 *
+
+    0.5903    1.2693    1.3671
+    1.6355    3.5203    3.7826
+    1.0903    2.3428    2.5278
+
+%Question 4 (a)
+A = eye(2); B = rand(2);
+A(:,1) = B(:,1)/sum(B(:,1)); A(:,2) = B(:,2)/sum(B(:,2))
+
+A =
+
+    0.3175    0.1891
+    0.6825    0.8109
+
+[1 1]*A
+
+ans =
+
+    1.0000    1.0000
+
+diary off
+%Question 4 (b)
+u = nulbasis(A - eye(2)), v = u/sum(u)
+
+u =
+
+    0.2770
+    1.0000
+
+
+v =
+
+    0.2169
+    0.7831
+
+A*v
+
+ans =
+
+    0.2169
+    0.7831
+
+diary off
