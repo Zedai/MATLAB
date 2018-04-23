@@ -1,0 +1,19 @@
+format compact
+%Venkata Saikiran Nakka
+%4116
+%Section C2
+%Math 250 MATLAB Lab Assignment #5
+rand('seed', 4116)
+%Question 1 (a)
+eigshow
+%There is one positive eigenvalues.
+%There are no negative eigenvalues.
+%The approximate eigenvalue is 1.6 from a graphical analysis.
+%Question 1 (b)
+%There are no lines through zero that contain both x and Ax.
+%There are no real eigenvalues or eigenvectors however there are complex ones because eigenvectors of a matrix always exist.
+%Question 2 (a)
+A = [1 3; 4 2]/4
+A =
+    0.2500    0.7500
+    1.0000    0.5000
